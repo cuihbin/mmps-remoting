@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+  <parent>
+    <groupId>com.zzvc.mmps</groupId>
+    <artifactId>mmps-parent</artifactId>
+    <version>6-SNAPSHOT</version>
+  </parent>
+
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>mmps-remoting</artifactId>
+  <packaging>pom</packaging>
+  <name>mmps-remoting</name>
+  <version>1.2.0-SNAPSHOT</version>
+
+  <properties>
+    <mmps-core.version>1.2.0-SNAPSHOT</mmps-core.version>
+    <mmps-db.version>1.2.0-SNAPSHOT</mmps-db.version>
+    <mmps-scheduler.version>1.2.0-SNAPSHOT</mmps-scheduler.version>
+    <mmps-utils.version>1.2.0-SNAPSHOT</mmps-utils.version>
+  </properties>
+
+  <scm>
+    <connection>scm:git:git@github.com:cuihbin/mmps-remoting.git</connection>
+    <developerConnection>scm:git:git@github.com:cuihbin/mmps-remoting.git</developerConnection>
+    <url>https://github.com/cuihbin</url>
+  </scm>
+
+  <modules>
+    <module>mmps-remoting-player-client</module>
+    <module>mmps-remoting-player-common</module>
+    <module>mmps-remoting-player-message</module>
+    <module>mmps-remoting-player-server</module>
+    <module>mmps-remoting-player-service</module>
+    <module>mmps-remoting-server-client</module>
+    <module>mmps-remoting-server-common</module>
+    <module>mmps-remoting-server-service</module>
+  </modules>
+</project>

@@ -1,0 +1,4 @@
+mmps-remoting-1.2.0-SNAPSHOT
+ + Change mmps-core dependency to its splitted successor modules
+
+
