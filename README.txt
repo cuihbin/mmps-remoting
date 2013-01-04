@@ -1,0 +1,1 @@
+Player-Server communication framework with underlying JMS and Hessian remoting
