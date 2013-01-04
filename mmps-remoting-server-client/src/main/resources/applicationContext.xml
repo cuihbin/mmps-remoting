@@ -3,6 +3,6 @@
   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
 
   <bean class="com.zzvc.mmps.server.task.impl.ServerStateReportSchedulerTask">
-    <property name="name" value="Server State Report" />
+    <property name="id" value="server.state.report" />
   </bean>
 </beans>
