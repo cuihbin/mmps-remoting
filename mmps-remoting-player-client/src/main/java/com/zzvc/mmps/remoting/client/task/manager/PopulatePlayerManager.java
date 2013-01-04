@@ -6,6 +6,8 @@ import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+import org.apache.xmlbeans.XmlException;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.zzvc.mmps.documents.KeysDocument;
@@ -18,6 +20,8 @@ import com.zzvc.mmps.utils.net.IpAddressUtil;
 import com.zzvc.mmps.utils.xmlbeans.XmlBeansUtil;
 
 public class PopulatePlayerManager extends RemotingServiceInitTaskSupport {
+	private static Logger logger = Logger.getLogger(PopulatePlayerManager.class);
+	
 	private static final String KEYS_DOCUMENT_PATH = "key.xml";
 	
 	@Autowired(required=false)
@@ -41,43 +45,34 @@ public class PopulatePlayerManager extends RemotingServiceInitTaskSupport {
 	}
 	
 	private KeyModelUtil loadPlayerKey() {
-		KeyModelUtil keyModelUtil = loadPlayerKeyFromRemotingService();
+		KeyModelUtil keyModelUtil = null;
 		
-		if (keyModelUtil == null) {
-			keyModelUtil = loadPlayerKeyFromLocalFile();
-		} else {
-			savePlayerKeyToLocalFile(keyModelUtil);
-		}
-		
-		if (keyModelUtil == null) {
-			throw new TaskException("Cannot load player key");
+		try {
+			keyModelUtil = loadPlayerKeyFromRemotingService();
+			storePlayerKeyToLocalFile(keyModelUtil);
+		} catch (Exception e1) {
+			logger.error("Error loading player key from remoting service", e1);
+			try {
+				keyModelUtil = loadPlayerKeyFromLocalFile();
+			} catch (Exception e2) {
+				logger.error("Error loading player key from local file", e2);
+				throw new TaskException("Error loading player key");
+			}
 		}
 		
 		return keyModelUtil;
 	}
 	
 	private KeyModelUtil loadPlayerKeyFromRemotingService() {
-		try {
-			KeyModelUtil keyModelUtil = new KeyModelUtil(remotingService.populatePlayer(getLocalAddresses()));
-			return keyModelUtil;
-		} catch (Exception e) {
-			return null;
-		}
+		return new KeyModelUtil(remotingService.populatePlayer(getLocalAddresses()));
 	}
 	
-	private KeyModelUtil loadPlayerKeyFromLocalFile() {
-		try {
-			return PlayerDocumentConverter.convertFromDocument(KeysDocument.Factory.parse(new File(KEYS_DOCUMENT_PATH)));
-		} catch (Exception e) {
-			return null;
-		}
+	private KeyModelUtil loadPlayerKeyFromLocalFile() throws XmlException, IOException {
+		return PlayerDocumentConverter.convertFromDocument(KeysDocument.Factory.parse(new File(KEYS_DOCUMENT_PATH)));
 	}
 	
-	private void savePlayerKeyToLocalFile(KeyModelUtil keyModelUtil) {
-		try {
-			XmlBeansUtil.saveXmlDocument(PlayerDocumentConverter.convertToDocument(keyModelUtil), KEYS_DOCUMENT_PATH);
-		} catch (IOException e) {
-		}
+	private void storePlayerKeyToLocalFile(KeyModelUtil keyModelUtil) throws IOException {
+		XmlBeansUtil.saveXmlDocument(PlayerDocumentConverter.convertToDocument(keyModelUtil), KEYS_DOCUMENT_PATH);
 	}
 	
 	private List<String> getLocalAddresses() {
