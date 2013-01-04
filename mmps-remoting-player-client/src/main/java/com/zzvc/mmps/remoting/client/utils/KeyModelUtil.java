@@ -12,11 +12,9 @@ public class KeyModelUtil {
 	private Map<String, List<KeyModel>> keys;
 	
 	public KeyModelUtil() {
-		super();
 	}
 
 	public KeyModelUtil(Map<String, List<KeyModel>> keys) {
-		super();
 		this.keys = keys;
 	}
 	
