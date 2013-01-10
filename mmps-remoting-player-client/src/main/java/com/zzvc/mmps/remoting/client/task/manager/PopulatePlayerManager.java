@@ -13,11 +13,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.zzvc.mmps.documents.KeysDocument;
 import com.zzvc.mmps.remoting.client.task.PopulatePlayer;
 import com.zzvc.mmps.remoting.client.task.impl.RemotingServiceInitTaskSupport;
+import com.zzvc.mmps.remoting.client.utils.IpAddressUtil;
 import com.zzvc.mmps.remoting.client.utils.KeyModelUtil;
 import com.zzvc.mmps.remoting.client.utils.PlayerDocumentConverter;
+import com.zzvc.mmps.remoting.client.utils.XmlBeansUtil;
 import com.zzvc.mmps.task.TaskException;
-import com.zzvc.mmps.utils.net.IpAddressUtil;
-import com.zzvc.mmps.utils.xmlbeans.XmlBeansUtil;
 
 public class PopulatePlayerManager extends RemotingServiceInitTaskSupport {
 	private static Logger logger = Logger.getLogger(PopulatePlayerManager.class);

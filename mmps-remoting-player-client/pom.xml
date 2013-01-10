@@ -45,12 +45,6 @@
     </dependency>
 
     <dependency>
-      <groupId>com.zzvc.mmps</groupId>
-      <artifactId>mmps-utils</artifactId>
-      <version>${mmps-utils.version}</version>
-    </dependency>
-
-    <dependency>
       <groupId>org.apache.xmlbeans</groupId>
       <artifactId>xmlbeans</artifactId>
     </dependency>
