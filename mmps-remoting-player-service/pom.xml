@@ -14,13 +14,14 @@
   <dependencies>
     <dependency>
       <groupId>com.zzvc.mmps</groupId>
-      <artifactId>mmps-player-data</artifactId>
-      <version>${project.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>com.zzvc.mmps</groupId>
       <artifactId>mmps-remoting-player-server</artifactId>
       <version>${project.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.zzvc.mmps</groupId>
+      <artifactId>mmps-player-data</artifactId>
+      <version>${mmps-player-data.version}</version>
     </dependency>
 
     <dependency>

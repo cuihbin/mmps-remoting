@@ -16,7 +16,7 @@
   <properties>
     <mmps-core.version>1.2.0-SNAPSHOT</mmps-core.version>
     <mmps-db.version>1.2.0-SNAPSHOT</mmps-db.version>
-    <mmps-scheduler.version>1.2.0-SNAPSHOT</mmps-scheduler.version>
+    <mmps-player-data.version>1.2.0-SNAPSHOT</mmps-player-data.version>
   </properties>
 
   <scm>

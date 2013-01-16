@@ -30,7 +30,7 @@
     <dependency>
       <groupId>com.zzvc.mmps</groupId>
       <artifactId>mmps-scheduler</artifactId>
-      <version>${mmps-scheduler.version}</version>
+      <version>${mmps-core.version}</version>
     </dependency>
 
     <dependency>

@@ -15,11 +15,6 @@
   <dependencies>
     <dependency>
       <groupId>com.zzvc.mmps</groupId>
-      <artifactId>mmps-player-data</artifactId>
-      <version>${project.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>com.zzvc.mmps</groupId>
       <artifactId>mmps-remoting-server-common</artifactId>
       <version>${project.version}</version>
     </dependency>
@@ -28,6 +23,12 @@
       <groupId>com.zzvc.mmps</groupId>
       <artifactId>mmps-db-service</artifactId>
       <version>${mmps-db.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.zzvc.mmps</groupId>
+      <artifactId>mmps-player-data</artifactId>
+      <version>${mmps-player-data.version}</version>
     </dependency>
 
     <dependency>
