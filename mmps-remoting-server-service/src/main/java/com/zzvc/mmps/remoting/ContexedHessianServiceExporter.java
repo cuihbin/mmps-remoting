@@ -10,6 +10,12 @@ import org.springframework.remoting.caucho.HessianServiceExporter;
 
 import com.caucho.services.server.ServiceContext;
 
+/**
+ * Save http request in @ServiceContext for later reference
+ * 
+ * @author cuihbin
+ * 
+ */
 public class ContexedHessianServiceExporter extends HessianServiceExporter {
 
 	@Override
