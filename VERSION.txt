@@ -3,3 +3,4 @@ mmps-remoting-2.0
  + Optimize file download logic
  + Optimize client configure resource file handling
  + Change player keys file location from current path to client home directory
+ + Added client module data updating error protection and message prompting

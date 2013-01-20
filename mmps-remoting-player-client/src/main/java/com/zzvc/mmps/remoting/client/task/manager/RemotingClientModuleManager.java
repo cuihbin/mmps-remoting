@@ -10,6 +10,7 @@ import com.zzvc.mmps.remoting.client.task.RemotingClientModule;
 import com.zzvc.mmps.remoting.client.task.impl.PopulatePlayerTaskSupport;
 import com.zzvc.mmps.remoting.message.RemotingNotifyMessage;
 import com.zzvc.mmps.remoting.message.RemotingPushMessage;
+import com.zzvc.mmps.remoting.model.RemotingData;
 import com.zzvc.mmps.task.utils.TaskUtils;
 
 public class RemotingClientModuleManager extends PopulatePlayerTaskSupport implements TopicMessageListenerTask {
@@ -27,7 +28,7 @@ public class RemotingClientModuleManager extends PopulatePlayerTaskSupport imple
 	public void afterStartup() {
 		for (RemotingClientModule task : tasks) {
 			if (TaskUtils.isTaskInited(task)) {
-				task.remotingUpdate();
+				invokeService(task);
 			}
 		}
 	}
@@ -45,7 +46,7 @@ public class RemotingClientModuleManager extends PopulatePlayerTaskSupport imple
 		if (keyModelUtil.matches(message.getRemotingAttribute())) {
 			for (RemotingClientModule task : tasks) {
 				if (TaskUtils.isTaskInited(task) && message.getServiceId().equals(task.getId())) {
-					task.onRemotingUpdate(message.getRemotingData());
+					updateTask(task, message.getRemotingData());
 				}
 			}
 		}
@@ -54,8 +55,21 @@ public class RemotingClientModuleManager extends PopulatePlayerTaskSupport imple
 	private void handleNotifyMessage(RemotingNotifyMessage message) {
 		for (RemotingClientModule task : tasks) {
 			if (TaskUtils.isTaskInited(task) && message.getServiceId().equals(task.getId())) {
-				task.remotingUpdate();
+				invokeService(task);
 			}
+		}
+	}
+	
+	private void invokeService(RemotingClientModule task) {
+		updateTask(task, remotingService.invoke(task.getId(), task.getRemotingAttribute()));
+	}
+	
+	private void updateTask(RemotingClientModule task, RemotingData data) {
+		try {
+			task.onRemotingUpdate(data);
+		} catch (Exception e) {
+			warnMessage("player.remoting.client.error.module.updatingerror", task.getLabel());
+			logger.error("Client module updating error", e);
 		}
 	}
 }
