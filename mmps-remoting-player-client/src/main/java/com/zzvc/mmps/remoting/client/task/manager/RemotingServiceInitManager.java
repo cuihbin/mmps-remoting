@@ -39,7 +39,7 @@ public class RemotingServiceInitManager extends TaskSupport {
 		try {
 			return (PlayerRemotingServiceManager) factory.create(PlayerRemotingServiceManager.class, loadRemotingServiceAddress());
 		} catch (MalformedURLException e) {
-			errorMessage("player.remoting.client.error.config.invalidurl");
+			errorMessage("player.remoting.client.error.service.url.invalid");
 			logger.error("Error parsing remoting service url", e);
 			throw new TaskException("Error parsing remoting service url", e);
 		}
@@ -50,7 +50,7 @@ public class RemotingServiceInitManager extends TaskSupport {
 		try {
 			return bundle.getString("player.service.address");
 		} catch (MissingResourceException e) {
-			errorMessage("player.remoting.client.error.config.loadfailed");
+			errorMessage("player.remoting.client.error.service.url.loadingfailed");
 			logger.error("Error loading client config file", e);
 			throw new TaskException("Error loading client config file", e);
 		}

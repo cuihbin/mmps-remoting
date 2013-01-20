@@ -2,6 +2,7 @@ package com.zzvc.mmps.remoting.client.task.manager;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 import org.apache.log4j.Logger;
@@ -38,12 +39,11 @@ public class ClientInitManager extends TaskSupport {
 	}
 	
 	private ResourceBundle loadClientResources() {
-		String homePath = null;
 		try {
 			return ResourceBundle.getBundle("client");
-		} catch (Exception e) {
-			errorMessage("player.remoting.client.error.config.missing", homePath);
-			logger.error("player.remoting.client.error.config.missing", e);
+		} catch (MissingResourceException e) {
+			errorMessage("player.remoting.client.error.init.config.loadingfailed");
+			logger.error("Missing client configure file", e);
 		}
 		throw new TaskException("Missing client configure file");
 	}
