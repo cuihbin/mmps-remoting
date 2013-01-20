@@ -41,19 +41,19 @@ public class PopulatePlayerManager extends RemotingServiceInitTaskSupport {
 		for (PopulatePlayer task : tasks) {
 			task.setPlayerKeys(keyModelUtil);
 		}
-		
 	}
 	
 	private KeyModelUtil loadPlayerKey() {
 		KeyModelUtil keyModelUtil = null;
+		File localFile = new File(new File(getClientResource("client.home")), KEYS_DOCUMENT_PATH);
 		
 		try {
 			keyModelUtil = loadPlayerKeyFromRemotingService();
-			storePlayerKeyToLocalFile(keyModelUtil);
+			storePlayerKeyToLocalFile(keyModelUtil, localFile);
 		} catch (Exception e1) {
 			logger.error("Error loading player key from remoting service", e1);
 			try {
-				keyModelUtil = loadPlayerKeyFromLocalFile();
+				keyModelUtil = loadPlayerKeyFromLocalFile(localFile);
 			} catch (Exception e2) {
 				logger.error("Error loading player key from local file", e2);
 				throw new TaskException("Error loading player key");
@@ -67,12 +67,12 @@ public class PopulatePlayerManager extends RemotingServiceInitTaskSupport {
 		return new KeyModelUtil(remotingService.populatePlayer(getLocalAddresses()));
 	}
 	
-	private KeyModelUtil loadPlayerKeyFromLocalFile() throws XmlException, IOException {
-		return PlayerDocumentConverter.convertFromDocument(KeysDocument.Factory.parse(new File(KEYS_DOCUMENT_PATH)));
+	private KeyModelUtil loadPlayerKeyFromLocalFile(File localFile) throws XmlException, IOException {
+		return PlayerDocumentConverter.convertFromDocument(KeysDocument.Factory.parse(localFile));
 	}
 	
-	private void storePlayerKeyToLocalFile(KeyModelUtil keyModelUtil) throws IOException {
-		XmlBeansUtil.saveXmlDocument(PlayerDocumentConverter.convertToDocument(keyModelUtil), KEYS_DOCUMENT_PATH);
+	private void storePlayerKeyToLocalFile(KeyModelUtil keyModelUtil, File localFile) throws IOException {
+		XmlBeansUtil.saveXmlDocument(PlayerDocumentConverter.convertToDocument(keyModelUtil), localFile);
 	}
 	
 	private List<String> getLocalAddresses() {
