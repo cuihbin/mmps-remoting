@@ -13,6 +13,10 @@
 
   <bean class="com.zzvc.mmps.jms.container.TopicMessageListenerContainer" />
 
+  <bean class="com.zzvc.mmps.remoting.client.task.manager.ClientInitManager">
+    <property name="id" value="client.init.manager" />
+  </bean>
+
   <bean class="com.zzvc.mmps.remoting.client.task.manager.RemotingServiceInitManager">
     <property name="id" value="remoting.service.init.manager" />
   </bean>

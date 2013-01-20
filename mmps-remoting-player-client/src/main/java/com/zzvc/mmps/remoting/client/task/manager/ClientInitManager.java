@@ -19,6 +19,11 @@ public class ClientInitManager extends TaskSupport {
 	
 	private ResourceBundle clientResources;
 	
+	public ClientInitManager() {
+		super();
+		pushBundle("PlayerRemotingClientResources");
+	}
+	
 	@Override
 	public void init() {
 		clientResources = loadClientResources();
