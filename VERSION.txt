@@ -1,3 +1,4 @@
 mmps-remoting-2.0
  + Improve player populate logic
  + Optimize file download logic
+ + Optimize client configure resource file handling
