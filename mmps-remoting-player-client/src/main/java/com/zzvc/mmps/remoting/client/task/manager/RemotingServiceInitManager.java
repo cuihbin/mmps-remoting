@@ -27,29 +27,32 @@ public class RemotingServiceInitManager extends TaskSupport {
 
 	@Override
 	public void init() {
-		ResourceBundle bundle = ResourceBundle.getBundle("config");
-		String remotingServiceAddress = null;
-		try {
-			remotingServiceAddress = bundle.getString("player.service.address");
-		} catch (MissingResourceException e) {
-			errorMessage("player.remoting.client.error.config.loadfailed");
-			logger.error("Error loading client config file", e);
-			throw new TaskException("Error loading client config file", e);
-		}
-		
-		HessianProxyFactory factory = new HessianProxyFactory();
-		PlayerRemotingServiceManager remotingService = null;
-		try {
-			remotingService = (PlayerRemotingServiceManager) factory.create(PlayerRemotingServiceManager.class, remotingServiceAddress);
-		} catch (MalformedURLException e) {
-			errorMessage("player.remoting.client.error.config.invalidurl");
-			logger.error("Error parsing remoting service url", e);
-			throw new TaskException("Error parsing remoting service url", e);
-		}
+		PlayerRemotingServiceManager remotingService = createRemotingService();
 		
 		for (RemotingServiceInit task : tasks) {
 			task.setRemotingService(remotingService);
 		}
 	}
 	
+	private PlayerRemotingServiceManager createRemotingService() {
+		HessianProxyFactory factory = new HessianProxyFactory();
+		try {
+			return (PlayerRemotingServiceManager) factory.create(PlayerRemotingServiceManager.class, loadRemotingServiceAddress());
+		} catch (MalformedURLException e) {
+			errorMessage("player.remoting.client.error.config.invalidurl");
+			logger.error("Error parsing remoting service url", e);
+			throw new TaskException("Error parsing remoting service url", e);
+		}
+	}
+	
+	private String loadRemotingServiceAddress() {
+		ResourceBundle bundle = ResourceBundle.getBundle("config");
+		try {
+			return bundle.getString("player.service.address");
+		} catch (MissingResourceException e) {
+			errorMessage("player.remoting.client.error.config.loadfailed");
+			logger.error("Error loading client config file", e);
+			throw new TaskException("Error loading client config file", e);
+		}
+	}
 }
