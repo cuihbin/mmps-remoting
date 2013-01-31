@@ -1,5 +1,3 @@
-mmps-remoting-2.1.1
-
 mmps-remoting-2.1
  + Optimize client configure resource file handling
  + Change player keys file location from current path to client home directory

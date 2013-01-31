@@ -11,19 +11,19 @@
   <artifactId>mmps-remoting</artifactId>
   <packaging>pom</packaging>
   <name>mmps-remoting</name>
-  <version>2.1.1-SNAPSHOT</version>
+  <version>2.1</version>
 
   <properties>
     <mmps-core.version>2.1</mmps-core.version>
     <mmps-db.version>2.2</mmps-db.version>
-    <mmps-player-data.version>2.2</mmps-player-data.version>
+    <mmps-player-data.version>2.1</mmps-player-data.version>
   </properties>
 
   <scm>
     <connection>scm:git:git@github.com:cuihbin/mmps-remoting.git</connection>
     <developerConnection>scm:git:git@github.com:cuihbin/mmps-remoting.git</developerConnection>
     <url>https://github.com/cuihbin</url>
-    <tag>HEAD</tag>
+    <tag>mmps-remoting-2.1</tag>
   </scm>
 
   <modules>
